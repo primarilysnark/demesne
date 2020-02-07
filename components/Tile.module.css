@@ -1,0 +1,227 @@
+.hex-tile--under {
+  background-image: url(/under.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 64px;
+  position: absolute;
+  transition: transform 0.1s;
+  transform: translateY(106px);
+  width: 85px;
+  z-index: 0;
+}
+
+.hex-tile {
+  border: 0;
+  display: block;
+  margin: 0;
+  padding: 0;
+  background: none;
+  position: absolute;
+  transition: transform 0.1s;
+  z-index: 1;
+}
+
+.hex-tile:after {
+  bottom: 0;
+  content: '';
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.hex-tile:hover:after {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.hex-tile:active {
+  transform: translateY(2px);
+}
+
+.hex-tile:active + .hex-tile--under {
+  transform: translateY(108px);
+}
+
+.hex-tile--base, .hex-tile--ocean {
+  clip-path: polygon(
+    50% 33%,
+    100% 50%,
+    100% 83.5%,
+    50% 100%,
+    0% 83.5%,
+    0% 50%
+  );
+}
+
+.hex-tile--ocean + .hex-tile--under {
+  background-image: url('/under-ocean.png');
+}
+
+.hex-tile--mountain-1 {
+  clip-path: polygon(
+    42px 11px,
+    47px 16px,
+    52px 16px,
+    59px 24px,
+    62px 36px,
+    70px 41px,
+    71px 47px,
+    100% 50%,
+    100% 83.5%,
+    42px 128px,
+    0% 83.5%,
+    0% 50%,
+    13px 42px,
+    28px 21px
+  );
+}
+
+.hex-tile--mountain-2 {
+  clip-path: polygon(
+    2px 55px,
+    5px 53px,
+    9px 44px,
+    15px 41px,
+    22px 28px,
+    34px 29px,
+    44px 36px,
+    53px 34px,
+    58px 30px,
+    63px 25px,
+    73px 34px,
+    76px 43px,
+    100% 50%,
+    100% 83.5%,
+    42px 128px,
+    0% 83.5%,
+    0% 64px
+  );
+}
+
+.hex-tile--mountain-3 {
+  clip-path: polygon(
+    3px 59px,
+    5px 53px,
+    9px 44px,
+    15px 41px,
+    23px 38px,
+    29px 44px,
+    35px 36px,
+    48px 38px,
+    53px 33px,
+    63px 34px,
+    70px 38px,
+    77px 48px,
+    100% 50%,
+    100% 83.5%,
+    42px 128px,
+    0% 83.5%,
+    0% 64px
+  );
+}
+
+.hex-tile--mountain-4 {
+  clip-path: polygon(
+    6px 41px,
+    16px 26px,
+    32px 11px,
+    41px 19px,
+    41px 23px,
+    51px 33px,
+    52px 37px,
+    56px 37px,
+    60px 46px,
+    70px 41px,
+    78px 49px,
+    81px 57px,
+    100% 50%,
+    100% 83.5%,
+    42px 128px,
+    0% 83.5%,
+    0% 64px
+  );
+}
+
+.hex-tile--marsh-1 {
+  clip-path: polygon(
+    6px 58px,
+    10px 58px,
+    29px 47px,
+    33px 46px,
+    43px 40px,
+    53px 47px,
+    57px 47px,
+    64px 53px,
+    79px 59px,
+    100% 50%,
+    100% 83.5%,
+    42px 128px,
+    0% 83.5%,
+    0% 64px
+  );
+}
+
+.hex-tile--marsh-2 {
+  clip-path: polygon(
+    10px 56px,
+    14px 56px,
+    22px 50px,
+    29px 49px,
+    39px 42px,
+    47px 42px,
+    50px 45px,
+    56px 47px,
+    57px 49px,
+    63px 50px,
+    64px 52px,
+    73px 57px,
+    79px 58px,
+    100% 50%,
+    100% 83.5%,
+    42px 128px,
+    0% 83.5%,
+    0% 64px
+  );
+}
+
+.hex-tile--marsh-3 {
+  clip-path: polygon(
+    13px 55px,
+    21px 53px,
+    23px 50px,
+    28px 49px,
+    33px 45px,
+    36px 45px,
+    41px 41px,
+    50px 44px,
+    58px 49px,
+    68px 54px,
+    77px 58px,
+    100% 50%,
+    100% 83.5%,
+    42px 128px,
+    0% 83.5%,
+    0% 64px
+  );
+}
+
+.hex-tile--marsh-4 {
+  clip-path: polygon(
+    9px 57px,
+    15px 55px,
+    25px 49px,
+    29px 48px,
+    38px 42px,
+    45px 42px,
+    51px 46px,
+    55px 47px,
+    68px 54px,
+    71px 55px,
+    100% 50%,
+    100% 83.5%,
+    42px 128px,
+    0% 83.5%,
+    0% 64px
+  );
+}
