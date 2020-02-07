@@ -1,5 +1,7 @@
 import { Fragment } from 'react'
-import styles from './Tile.module.css'
+import styles from './Tile.module.scss'
+
+const HIDDEN_TERRAIN = ['empty']
 
 function Tile({ x, y, terrain, variantCount }) {
   const xCoordinate = 64 + 85 * x + (y % 2 === 1 ? 42 : 0);
@@ -19,9 +21,13 @@ function Tile({ x, y, terrain, variantCount }) {
   return (
     <Fragment>
       <button className={className} style={{ top: `${yCoordinate}px`, left: `${xCoordinate}px` }}>
-        <img src={`/${terrain}-${variant}.png`} />
+        {HIDDEN_TERRAIN.includes(terrain) ? null : (
+          <img src={`/${terrain}-${variant}.png`} />
+        )}
       </button>
-      <div className={styles['hex-tile--under']} style={{ top: `${yCoordinate}px`, left: `${xCoordinate}px` }} />
+      {HIDDEN_TERRAIN.includes(terrain) ? null : (
+        <div className={styles['hex-tile--under']} style={{ top: `${yCoordinate}px`, left: `${xCoordinate}px` }} />
+      )}
     </Fragment>
   )
 }

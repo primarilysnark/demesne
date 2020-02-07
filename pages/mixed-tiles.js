@@ -1,6 +1,5 @@
-// import MarshTile from '../components/tiles/MarshTile'
 import Tile from '../components/Tile'
-import styles from './ClipPath.module.css'
+import styles from './ClipPath.module.scss'
 
 function MixedTiles() {
   return (

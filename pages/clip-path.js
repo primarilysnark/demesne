@@ -1,5 +1,5 @@
 import Tile from '../components/Tile'
-import styles from './ClipPath.module.css'
+import styles from './ClipPath.module.scss'
 
 function ClipPath() {
   return (

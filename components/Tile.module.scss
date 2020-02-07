@@ -11,14 +11,21 @@
 }
 
 .hex-tile {
+  background: none;
   border: 0;
   display: block;
+  height: 128px;
   margin: 0;
   padding: 0;
-  background: none;
   position: absolute;
   transition: transform 0.1s;
-  z-index: 1;
+  width: 85px;
+  z-index: 9;
+}
+
+.hex-tile--menu {
+  position: absolute;
+  z-index: 99;
 }
 
 .hex-tile:after {
@@ -35,6 +42,10 @@
   background: rgba(0, 0, 0, 0.4);
 }
 
+.hex-tile--empty:hover:after {
+  background: rgba(255, 255, 255, 0.2);
+}
+
 .hex-tile:active {
   transform: translateY(2px);
 }
@@ -43,7 +54,7 @@
   transform: translateY(108px);
 }
 
-.hex-tile--base, .hex-tile--ocean {
+.hex-tile--base, .hex-tile--empty, .hex-tile--ocean, .hex-tile--void {
   clip-path: polygon(
     50% 33%,
     100% 50%,
@@ -56,6 +67,14 @@
 
 .hex-tile--ocean + .hex-tile--under {
   background-image: url('/under-ocean.png');
+}
+
+.hex-tile--void + .hex-tile--under {
+  background-image: url('/under-void.png');
+}
+
+.hex-tile--void:hover:after {
+  background: rgba(60, 60, 60, 0.2);
 }
 
 .hex-tile--mountain-1 {
