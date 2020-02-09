@@ -7,10 +7,12 @@ function MyApp({ Component, pageProps }) {
     <div>
       <nav className="navbar is-transparent" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <a className="navbar-item" href="https://bulma.io">
-            <i className="fas fa-dungeon" />
-            Hex Map Explorer
-          </a>
+          <Link href="/">
+            <a className="navbar-item">
+              <i className="fas fa-dungeon" />
+              Hex Map Explorer
+            </a>
+          </Link>
 
           <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
