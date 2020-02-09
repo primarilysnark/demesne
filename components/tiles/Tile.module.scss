@@ -1,0 +1,54 @@
+@keyframes slide-up {
+  0% {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.hex-tile {
+  animation: slide-up 1s ease;
+  background: none;
+  border: 0;
+  display: inline-block;
+  height: 128px;
+  margin: -70px 0;
+  outline: none;
+  padding: 0;
+  position: relative;
+  transition: transform 0.1s;
+  width: 85px;
+  z-index: 9;
+
+  &:after {
+    bottom: -35%;
+    content: '';
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  &:active {
+    transform: translateY(2px);
+  }
+
+  &:hover:after {
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  &__under {
+    background-image: url(/under.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    height: 64px;
+    margin: -23px 0 0;
+    width: 85px;
+    z-index: 0;
+  }
+}

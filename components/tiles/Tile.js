@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
-import './Tile.module.scss'
+import './Index.module.scss'
 
-const HIDDEN_TERRAIN = ['empty', 'hidden']
+const HIDDEN_TERRAIN = ['new', 'hidden']
 
 function Tile({ x, y, onClick, terrain, variantCount }) {
   const variant = Math.abs(x | y) % variantCount + 1

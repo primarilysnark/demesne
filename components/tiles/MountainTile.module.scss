@@ -1,0 +1,86 @@
+.hex-tile--mountain {
+  &-1 {
+    clip-path: polygon(
+      13px 42px,
+      28px 21px,
+      42px 11px,
+      47px 16px,
+      52px 16px,
+      59px 24px,
+      62px 36px,
+      70px 41px,
+      71px 47px,
+      100% 50%,
+      100% 117%,
+      50% 134%,
+      0% 117%,
+      0% 50%
+    );
+  }
+
+  &-2 {
+    clip-path: polygon(
+      2px 55px,
+      5px 53px,
+      9px 44px,
+      15px 41px,
+      22px 28px,
+      34px 29px,
+      44px 36px,
+      53px 34px,
+      58px 30px,
+      63px 25px,
+      73px 34px,
+      76px 43px,
+      100% 50%,
+      100% 117%,
+      50% 134%,
+      0% 117%,
+      0% 50%
+    );
+  }
+
+  &-3 {
+    clip-path: polygon(
+      3px 59px,
+      5px 53px,
+      9px 44px,
+      15px 41px,
+      23px 38px,
+      29px 44px,
+      35px 36px,
+      48px 38px,
+      53px 33px,
+      63px 34px,
+      70px 38px,
+      77px 48px,
+      100% 50%,
+      100% 117%,
+      50% 134%,
+      0% 117%,
+      0% 50%
+    );
+  }
+
+  &-4 {
+    clip-path: polygon(
+      6px 41px,
+      16px 26px,
+      32px 11px,
+      41px 19px,
+      41px 23px,
+      51px 33px,
+      52px 37px,
+      56px 37px,
+      60px 46px,
+      70px 41px,
+      78px 49px,
+      81px 57px,
+      100% 50%,
+      100% 117%,
+      50% 134%,
+      0% 117%,
+      0% 50%
+    );
+  }
+}

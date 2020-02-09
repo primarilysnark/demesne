@@ -1,4 +1,4 @@
-import Tile from '../components/Tile'
+import Tile from '../components/tiles/Tile'
 import './ClipPath.module.scss'
 
 function MixedTiles() {

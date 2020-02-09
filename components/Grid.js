@@ -1,10 +1,10 @@
 import { Component } from 'react'
 import { omit } from 'lodash'
 import { hasAdjacencyToExistingHexes } from '../utils/hexes'
-import Tile from '../components/Tile'
+import Tile from '../components/tiles/Tile'
 import './Grid.module.scss'
 
-const ADJACENT_TERRAIN_TYPE = 'empty'
+const ADJACENT_TERRAIN_TYPE = 'new'
 const HIDDEN_TERRAIN_TYPE = 'hidden'
 
 export default class Grid extends Component {

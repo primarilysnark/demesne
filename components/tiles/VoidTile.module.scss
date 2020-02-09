@@ -1,0 +1,14 @@
+.hex-tile--void {
+  clip-path: polygon(
+    50% 33%,
+    100% 50%,
+    100% 117%,
+    50% 134%,
+    0% 117%,
+    0% 50%
+  );
+
+  > .hex-tile__under {
+    background-image: url('/under-void.png');
+  }
+}

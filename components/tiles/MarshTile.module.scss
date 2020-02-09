@@ -1,0 +1,84 @@
+.hex-tile--marsh {
+  &-1 {
+    clip-path: polygon(
+      6px 58px,
+      10px 58px,
+      29px 47px,
+      33px 46px,
+      43px 40px,
+      53px 47px,
+      57px 47px,
+      64px 53px,
+      79px 59px,
+      100% 50%,
+      100% 117%,
+      50% 134%,
+      0% 117%,
+      0% 50%
+    );
+  }
+
+  &-2 {
+    clip-path: polygon(
+      10px 56px,
+      14px 56px,
+      22px 50px,
+      29px 49px,
+      39px 42px,
+      47px 42px,
+      50px 45px,
+      56px 47px,
+      57px 49px,
+      63px 50px,
+      64px 52px,
+      73px 57px,
+      79px 58px,
+      100% 50%,
+      100% 117%,
+      50% 134%,
+      0% 117%,
+      0% 50%
+    );
+  }
+
+  &-3 {
+    clip-path: polygon(
+      13px 55px,
+      21px 53px,
+      23px 50px,
+      28px 49px,
+      33px 45px,
+      36px 45px,
+      41px 41px,
+      50px 44px,
+      58px 49px,
+      68px 54px,
+      77px 58px,
+      100% 50%,
+      100% 117%,
+      50% 134%,
+      0% 117%,
+      0% 50%
+    );
+  }
+
+  &-4 {
+    clip-path: polygon(
+      9px 57px,
+      15px 55px,
+      25px 49px,
+      29px 48px,
+      38px 42px,
+      45px 42px,
+      51px 46px,
+      55px 47px,
+      68px 54px,
+      71px 55px,
+      100% 50%,
+      100% 117%,
+      50% 134%,
+      0% 117%,
+      0% 50%
+    );
+  }
+}

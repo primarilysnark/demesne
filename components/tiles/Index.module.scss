@@ -1,0 +1,11 @@
+/* Base Styles */
+@import './Tile.module.scss';
+
+/* Terrain-specific Styles */
+@import './BaseTile.module.scss';
+@import './HiddenTile.module.scss';
+@import './MarshTile.module.scss';
+@import './MountainTile.module.scss';
+@import './NewTile.module.scss';
+@import './OceanTile.module.scss';
+@import './VoidTile.module.scss';

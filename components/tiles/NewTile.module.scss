@@ -1,0 +1,14 @@
+.hex-tile--new {
+  clip-path: polygon(
+    50% 33%,
+    100% 50%,
+    100% 83.5%,
+    50% 100%,
+    0% 83.5%,
+    0% 50%
+  );
+
+  &:hover:after {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
