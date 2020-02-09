@@ -1,19 +1,43 @@
-import styles from '../styles/styles.scss'
+import Link from 'next/link'
+import '../styles/styles.scss'
+import '../node_modules/@fortawesome/fontawesome-pro/css/all.min.css'
 
 function MyApp({ Component, pageProps }) {
   return (
     <div>
-      <nav className={`${styles.navbar} ${styles['is-black']}`} role="navigation" aria-label="main navigation">
-        <div className={styles['navbar-brand']}>
-          <a className={styles['navbar-item']} href="https://bulma.io">
-            <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
+      <nav className="navbar is-transparent" role="navigation" aria-label="main navigation">
+        <div className="navbar-brand">
+          <a className="navbar-item" href="https://bulma.io">
+            <i className="fas fa-dungeon" />
+            Hex Map Explorer
           </a>
 
-          <a role="button" className={styles['navbar-burger'] + ' ' + styles['burger']} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </a>
+        </div>
+        <div id="navbarBasicExample" className="navbar-menu">
+          <div className="navbar-start">
+            <Link href="/clip-path">
+              <a className="navbar-item">
+                Clip Path Test
+              </a>
+            </Link>
+
+            <Link href="/mixed-tiles">
+              <a className="navbar-item">
+                Mixed Tiles Test
+              </a>
+            </Link>
+
+            <Link href="/tile-map">
+              <a className="navbar-item">
+                Tile Map Test
+              </a>
+            </Link>
+          </div>
         </div>
       </nav>
       <Component {...pageProps} />

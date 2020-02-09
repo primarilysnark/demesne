@@ -1,8 +1,17 @@
 $gunmetal-blue: #000614;
 
 .grid {
+  align-items: center;
   background: $gunmetal-blue;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  margin: 0 auto;
   position: relative;
-  height: 375px;
-  width: 575px;
+  transition: margin 0.2s;
+}
+
+.row:nth-child(2n) {
+  margin-left: 42px;
 }

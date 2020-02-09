@@ -1,60 +1,88 @@
-.hex-tile--under {
+@keyframes slide-up {
+  0% {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.hex-tile__under {
   background-image: url(/under.png);
   background-repeat: no-repeat;
   background-size: cover;
-  height: 64px;
   position: absolute;
-  transition: transform 0.1s;
-  transform: translateY(106px);
+  height: 64px;
+  margin: -23px 0 0;
   width: 85px;
   z-index: 0;
 }
 
 .hex-tile {
+  animation: slide-up 1s ease;
   background: none;
   border: 0;
-  display: block;
+  display: inline-block;
   height: 128px;
-  margin: 0;
+  margin: -70px 0;
+  outline: none;
   padding: 0;
-  position: absolute;
+  position: relative;
   transition: transform 0.1s;
   width: 85px;
   z-index: 9;
+
+  &:after {
+    bottom: -35%;
+    content: '';
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  &:active {
+    transform: translateY(2px);
+  }
+
+  &:hover:after {
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  &--empty {
+    &:hover:after {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  &--hidden {
+    pointer-events: none;
+
+    &:after {
+      cursor: default;
+    }
+
+    &:hover:after {
+      background: none;
+    }
+  }
 }
 
-.hex-tile--menu {
-  position: absolute;
-  z-index: 99;
+.hex-tile--base, .hex-tile--ocean, .hex-tile--void {
+  clip-path: polygon(
+    50% 33%,
+    100% 50%,
+    100% 117%,
+    50% 134%,
+    0% 117%,
+    0% 50%
+  );
 }
 
-.hex-tile:after {
-  bottom: 0;
-  content: '';
-  cursor: pointer;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-
-.hex-tile:hover:after {
-  background: rgba(0, 0, 0, 0.4);
-}
-
-.hex-tile--empty:hover:after {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.hex-tile:active {
-  transform: translateY(2px);
-}
-
-.hex-tile:active + .hex-tile--under {
-  transform: translateY(108px);
-}
-
-.hex-tile--base, .hex-tile--empty, .hex-tile--ocean, .hex-tile--void {
+.hex-tile--empty, .hex-tile--hidden {
   clip-path: polygon(
     50% 33%,
     100% 50%,
@@ -65,11 +93,11 @@
   );
 }
 
-.hex-tile--ocean + .hex-tile--under {
+.hex-tile--ocean > .hex-tile__under {
   background-image: url('/under-ocean.png');
 }
 
-.hex-tile--void + .hex-tile--under {
+.hex-tile--void > .hex-tile__under {
   background-image: url('/under-void.png');
 }
 
@@ -79,6 +107,8 @@
 
 .hex-tile--mountain-1 {
   clip-path: polygon(
+    13px 42px,
+    28px 21px,
     42px 11px,
     47px 16px,
     52px 16px,
@@ -87,12 +117,10 @@
     70px 41px,
     71px 47px,
     100% 50%,
-    100% 83.5%,
-    42px 128px,
-    0% 83.5%,
-    0% 50%,
-    13px 42px,
-    28px 21px
+    100% 117%,
+    50% 134%,
+    0% 117%,
+    0% 50%
   );
 }
 
@@ -111,10 +139,10 @@
     73px 34px,
     76px 43px,
     100% 50%,
-    100% 83.5%,
-    42px 128px,
-    0% 83.5%,
-    0% 64px
+    100% 117%,
+    50% 134%,
+    0% 117%,
+    0% 50%
   );
 }
 
@@ -133,10 +161,10 @@
     70px 38px,
     77px 48px,
     100% 50%,
-    100% 83.5%,
-    42px 128px,
-    0% 83.5%,
-    0% 64px
+    100% 117%,
+    50% 134%,
+    0% 117%,
+    0% 50%
   );
 }
 
@@ -155,10 +183,10 @@
     78px 49px,
     81px 57px,
     100% 50%,
-    100% 83.5%,
-    42px 128px,
-    0% 83.5%,
-    0% 64px
+    100% 117%,
+    50% 134%,
+    0% 117%,
+    0% 50%
   );
 }
 
@@ -174,10 +202,10 @@
     64px 53px,
     79px 59px,
     100% 50%,
-    100% 83.5%,
-    42px 128px,
-    0% 83.5%,
-    0% 64px
+    100% 117%,
+    50% 134%,
+    0% 117%,
+    0% 50%
   );
 }
 
@@ -197,10 +225,10 @@
     73px 57px,
     79px 58px,
     100% 50%,
-    100% 83.5%,
-    42px 128px,
-    0% 83.5%,
-    0% 64px
+    100% 117%,
+    50% 134%,
+    0% 117%,
+    0% 50%
   );
 }
 
@@ -218,10 +246,10 @@
     68px 54px,
     77px 58px,
     100% 50%,
-    100% 83.5%,
-    42px 128px,
-    0% 83.5%,
-    0% 64px
+    100% 117%,
+    50% 134%,
+    0% 117%,
+    0% 50%
   );
 }
 
@@ -238,9 +266,9 @@
     68px 54px,
     71px 55px,
     100% 50%,
-    100% 83.5%,
-    42px 128px,
-    0% 83.5%,
-    0% 64px
+    100% 117%,
+    50% 134%,
+    0% 117%,
+    0% 50%
   );
 }
