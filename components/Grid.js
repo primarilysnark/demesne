@@ -14,7 +14,44 @@ export default class Grid extends Component {
     this.state = {
       populatedHexes: {
         0: {
-          0: "ocean"
+          0: "desert",
+          1: "forest",
+          2: "hills",
+          3: "jungle",
+          4: "marsh",
+          5: "mountain",
+          6: "plains",
+          7: "water"
+        },
+        1: {
+          0: "desert",
+          1: "forest",
+          2: "hills",
+          3: "jungle",
+          4: "marsh",
+          5: "mountain",
+          6: "plains",
+          7: "water"
+        },
+        2: {
+          0: "desert",
+          1: "forest",
+          2: "hills",
+          3: "jungle",
+          4: "marsh",
+          5: "mountain",
+          6: "plains",
+          7: "water"
+        },
+        3: {
+          0: "desert",
+          1: "forest",
+          2: "hills",
+          3: "jungle",
+          4: "marsh",
+          5: "mountain",
+          6: "plains",
+          7: "water"
         }
       }
     }
@@ -46,7 +83,7 @@ export default class Grid extends Component {
             ...state.populatedHexes,
             [x]: {
               ...state.populatedHexes[x],
-              [y]: 'ocean'
+              [y]: 'water'
             }
           }
         }

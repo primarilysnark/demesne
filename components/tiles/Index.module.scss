@@ -3,9 +3,14 @@
 
 /* Terrain-specific Styles */
 @import './BaseTile.module.scss';
+@import './DesertTile.module.scss';
+@import './ForestTile.module.scss';
 @import './HiddenTile.module.scss';
+@import './HillsTile.module.scss';
+@import './JungleTile.module.scss';
 @import './MarshTile.module.scss';
 @import './MountainTile.module.scss';
 @import './NewTile.module.scss';
-@import './OceanTile.module.scss';
+@import './PlainsTile.module.scss';
 @import './VoidTile.module.scss';
+@import './WaterTile.module.scss';

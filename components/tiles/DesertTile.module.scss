@@ -1,0 +1,123 @@
+.hex-tile--desert {
+  &-1 {
+    clip-path: polygon(
+      2px 62px,
+      4px 61px,
+      7px 58px,
+      13px 54px,
+      20px 53px,
+      30px 46px,
+      34px 46px,
+      38px 43px,
+      41px 42px,
+      45px 43px,
+      51px 46px,
+      55px 48px,
+      63px 48px,
+      66px 52px,
+      72px 55px,
+      74px 58px,
+      80px 60px,
+      81px 62px,
+
+      100% 50%,
+      100% 117%,
+      50% 134%,
+      0% 117%,
+      0% 50%
+    );
+  }
+
+  &-2 {
+    clip-path: polygon(
+      3px 62px,
+      10px 56px,
+      15px 56px,
+      21px 51px,
+      28px 47px,
+      32px 48px,
+      39px 43px,
+      42px 42px,
+      44px 43px,
+      45px 42px,
+      48px 42px,
+      50px 45px,
+      52px 45px,
+      56px 49px,
+      62px 49px,
+      66px 52px,
+      68px 54px,
+      73px 56px,
+      76px 56px,
+      80px 60px,
+      82px 61px,
+
+      100% 50%,
+      100% 117%,
+      50% 134%,
+      0% 117%,
+      0% 50%
+    );
+  }
+
+  &-3 {
+    clip-path: polygon(
+      6px 59px,
+      8px 59px,
+      19px 51px,
+      21px 51px,
+      22px 52px,
+      30px 47px,
+      33px 47px,
+      39px 43px,
+      41px 43px,
+      44px 42px,
+      48px 44px,
+      53px 44px,
+      59px 50px,
+      63px 52px,
+      71px 53px,
+      74px 56px,
+      78px 57px,
+
+      100% 50%,
+      100% 117%,
+      50% 134%,
+      0% 117%,
+      0% 50%
+    );
+  }
+
+  &-4 {
+    clip-path: polygon(
+      11px 53px,
+      20px 51px,
+      24px 49px,
+      30px 49px,
+      34px 45px,
+      36px 45px,
+      39px 43px,
+      44px 42px,
+      49px 44px,
+      51px 46px,
+      53px 46px,
+      54px 48px,
+      57px 48px,
+      61px 51px,
+      63px 51px,
+      63px 53px,
+      68px 55px,
+      73px 55px,
+      74px 57px,
+      78px 59px,
+      81px 59px,
+      83px 62px,
+
+      100% 50%,
+      100% 117%,
+      50% 134%,
+      0% 117%,
+      0% 50%
+    );
+  }
+}
