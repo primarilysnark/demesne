@@ -1,5 +1,3 @@
-import { Component } from 'react'
-import { omit } from 'lodash'
 import { hasAdjacencyToExistingHexes } from '../utils/hexes'
 import Tile from '../components/tiles/Tile'
 import './Grid.module.scss'
@@ -7,163 +5,80 @@ import './Grid.module.scss'
 const ADJACENT_TERRAIN_TYPE = 'new'
 const HIDDEN_TERRAIN_TYPE = 'hidden'
 
-export default class Grid extends Component {
-  constructor(props) {
-    super(props)
+function Grid({ map, onClickTile }) {
+  const populatedHexes = map.getColumns()
+  const populatedHexColumns = Object.keys(populatedHexes)
+  const firstPopulatedColumnRows = Object.keys(populatedHexes[populatedHexColumns[0]])
 
-    this.state = {
-      populatedHexes: {
-        0: {
-          0: "desert",
-          1: "forest",
-          2: "hills",
-          3: "jungle",
-          4: "marsh",
-          5: "mountain",
-          6: "plains",
-          7: "water"
-        },
-        1: {
-          0: "desert",
-          1: "forest",
-          2: "hills",
-          3: "jungle",
-          4: "marsh",
-          5: "mountain",
-          6: "plains",
-          7: "water"
-        },
-        2: {
-          0: "desert",
-          1: "forest",
-          2: "hills",
-          3: "jungle",
-          4: "marsh",
-          5: "mountain",
-          6: "plains",
-          7: "water"
-        },
-        3: {
-          0: "desert",
-          1: "forest",
-          2: "hills",
-          3: "jungle",
-          4: "marsh",
-          5: "mountain",
-          6: "plains",
-          7: "water"
-        }
-      }
+  // Set starting minimum and maximum column and row coordinates
+  const minimumPopulatedHexColumn = Math.min(...populatedHexColumns) - 1
+  const maximumPopulatedHexColumn = Math.max(...populatedHexColumns)
+  let minimumPopulatedHexRow = Math.min(...firstPopulatedColumnRows)
+  let maximumPopulatedHexRow = Math.max(...firstPopulatedColumnRows)
+
+  // Loop through all columns to determine minimum and maximum row coordinates
+  populatedHexColumns.forEach(column => {
+    const columnRows = Object.keys(populatedHexes[column])
+
+    // Determine local minimum and maximum row
+    const minimumColumnHexRow = Math.min(...columnRows)
+    const maximumColumnHexRow = Math.max(...columnRows)
+
+    // Update populated minimum and maximum if greater
+    if (maximumColumnHexRow > maximumPopulatedHexRow) {
+      maximumPopulatedHexRow = maximumColumnHexRow
     }
 
-    this.addOrDeleteTerrain = this.addOrDeleteTerrain.bind(this)
-  }
+    if (minimumColumnHexRow < minimumPopulatedHexRow) {
+      minimumPopulatedHexRow = minimumColumnHexRow
+    }
+  })
 
-  addOrDeleteTerrain(x, y) {
-    this.setState(state => {
-      if (state.populatedHexes[x] && state.populatedHexes[x][y]) {
-        if (Object.keys(state.populatedHexes[x]).length === 1) {
-          return {
-            ...state,
-            populatedHexes: omit(state.populatedHexes, [x])
-          }
-        } else {
-          return {
-            ...state,
-            populatedHexes: {
-              ...state.populatedHexes,
-              [x]: omit(state.populatedHexes[x], [y])
-            }
-          }
-        }
-      } else {
-        return {
-          ...state,
-          populatedHexes: {
-            ...state.populatedHexes,
-            [x]: {
-              ...state.populatedHexes[x],
-              [y]: 'water'
-            }
-          }
-        }
-      }
-    })
-  }
+  // Update minimum and maximum rows to account for empty tiles
+  minimumPopulatedHexRow = minimumPopulatedHexRow - 1
+  maximumPopulatedHexRow = maximumPopulatedHexRow + 1
 
-  render() {
-    const { populatedHexes } = this.state
+  // Calculate renderable region for tile grid
+  const columnCountToRender = maximumPopulatedHexColumn - minimumPopulatedHexColumn + 2
+  const rowCountToRender = maximumPopulatedHexRow - minimumPopulatedHexRow + 1
 
-    const populatedHexColumns = Object.keys(populatedHexes)
-    const firstPopulatedColumnRows = Object.keys(populatedHexes[populatedHexColumns[0]])
+  const gridWidth = (columnCountToRender) * 85 + 42.5
 
-    // Set starting minimum and maximum column and row coordinates
-    const minimumPopulatedHexColumn = Math.min(...populatedHexColumns) - 1
-    const maximumPopulatedHexColumn = Math.max(...populatedHexColumns)
-    let minimumPopulatedHexRow = Math.min(...firstPopulatedColumnRows)
-    let maximumPopulatedHexRow = Math.max(...firstPopulatedColumnRows)
+  return (
+    <div className="wrapper" style={{ width: `${gridWidth}px` }}>
+      {Array.from(Array(rowCountToRender)).map((_, rowIndex) => {
+        const rowCoordinate = rowIndex + minimumPopulatedHexRow
+        const rowIsOffset = rowCoordinate % 2 !== 0
 
-    // Loop through all columns to determine minimum and maximum row coordinates
-    populatedHexColumns.forEach(column => {
-      const columnRows = Object.keys(populatedHexes[column])
+        return (
+          <div key={rowCoordinate} className={rowIsOffset ? 'row--offset' : undefined}>
+            {Array.from(Array(columnCountToRender)).map((_, columnIndex) => {
+              const columnCoordinate = columnIndex + minimumPopulatedHexColumn
 
-      // Determine local minimum and maximum row
-      const minimumColumnHexRow = Math.min(...columnRows)
-      const maximumColumnHexRow = Math.max(...columnRows)
+              const hex = map.getHex({ column: columnCoordinate, row: rowCoordinate })
+              const hasAdjacency = hasAdjacencyToExistingHexes(columnCoordinate, rowCoordinate, populatedHexes)
 
-      // Update populated minimum and maximum if greater
-      if (maximumColumnHexRow > maximumPopulatedHexRow) {
-        maximumPopulatedHexRow = maximumColumnHexRow
-      }
+              const terrain = hex ?
+                hex.terrain :
+                hasAdjacency ?
+                  ADJACENT_TERRAIN_TYPE :
+                  HIDDEN_TERRAIN_TYPE
 
-      if (minimumColumnHexRow < minimumPopulatedHexRow) {
-        minimumPopulatedHexRow = minimumColumnHexRow
-      }
-    })
-
-    // Update minimum and maximum rows to account for empty tiles
-    minimumPopulatedHexRow = minimumPopulatedHexRow - 1
-    maximumPopulatedHexRow = maximumPopulatedHexRow + 1
-
-    // Calculate renderable region for tile grid
-    const columnCountToRender = maximumPopulatedHexColumn - minimumPopulatedHexColumn + 2
-    const rowCountToRender = maximumPopulatedHexRow - minimumPopulatedHexRow + 1
-
-    let gridWidth = (columnCountToRender) * 85 + 42.5
-
-    return (
-      <div className="wrapper" style={{ width: `${gridWidth}px` }}>
-        {Array.from(Array(rowCountToRender)).map((_, rowIndex) => {
-          const rowCoordinate = rowIndex + minimumPopulatedHexRow
-          const rowIsOffset = rowCoordinate % 2 !== 0
-          let columnCount = columnCountToRender
-
-          return (
-            <div key={rowCoordinate} className={rowIsOffset ? 'row--offset' : undefined}>
-              {Array.from(Array(columnCount)).map((_, columnIndex) => {
-                const columnCoordinate = columnIndex + minimumPopulatedHexColumn
-                const hasAdjacency = hasAdjacencyToExistingHexes(columnCoordinate, rowCoordinate, populatedHexes)
-
-                const terrain = populatedHexes[columnCoordinate] && populatedHexes[columnCoordinate][rowCoordinate] ?
-                  populatedHexes[columnCoordinate][rowCoordinate] :
-                  hasAdjacency ?
-                    ADJACENT_TERRAIN_TYPE :
-                    HIDDEN_TERRAIN_TYPE
-
-                return (
-                  <Tile
-                    key={`${columnCoordinate}, ${rowCoordinate}`}
-                    onClick={() => this.addOrDeleteTerrain(columnCoordinate, rowCoordinate)}
-                    terrain={terrain}
-                    x={columnCoordinate}
-                    y={rowCoordinate}
-                  />
-                )
-              })}
-            </div>
-          )
-        })}
-      </div>
-    )
-  }
+              return (
+                <Tile
+                  key={`${columnCoordinate}, ${rowCoordinate}`}
+                  onClick={() => onClickTile({ column: columnCoordinate, row: rowCoordinate })}
+                  terrain={terrain}
+                  x={columnCoordinate}
+                  y={rowCoordinate}
+                />
+              )
+            })}
+          </div>
+        )
+      })}
+    </div>
+  )
 }
+
+export default Grid
