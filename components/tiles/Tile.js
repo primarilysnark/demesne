@@ -4,7 +4,7 @@ import './Index.module.scss'
 const HIDDEN_TERRAIN = ['new', 'hidden']
 
 function Tile({ x, y, onClick, terrain, variantCount }) {
-  const variant = Math.abs(x | y) % variantCount + 1
+  const variant = Math.abs(x + y) % variantCount + 1
 
   return (
     <button className={`hex-tile hex-tile--${terrain} hex-tile--${terrain}-${variant}`} onClick={onClick}>
