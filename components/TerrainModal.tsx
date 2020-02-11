@@ -11,7 +11,7 @@ const VALID_TERRAINS = [
   'water'
 ]
 
-function TerrainModal({ onCancel, onSubmit }) {
+function TerrainModal({ onCancel, onSubmit }: { onCancel: () => void, onSubmit: ({ terrain }: { terrain: string }) => void }) {
   return (
     <div className="terrain-modal">
       <div className="terrain-modal__header">

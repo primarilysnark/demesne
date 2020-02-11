@@ -4,20 +4,27 @@ import Map from '../utils/map'
 import './ClipPath.module.scss'
 import TerrainModal from '../components/TerrainModal'
 
-class TileMap extends Component {
-  constructor(props) {
+interface TileMapState {
+  map: Map,
+  terrainModal: {
+    column: number | null,
+    isActive: boolean,
+    row: number | null
+  }
+}
+
+class TileMap extends Component<{}, TileMapState> {
+  constructor(props: {}) {
     super(props)
 
     this.state = {
-      map: new Map({
-        populatedHexes: [
-          {
-            column: 1,
-            row: 1,
-            terrain: 'water'
-          }
-        ]
-      }),
+      map: Map.fromArray([
+        {
+          column: 1,
+          row: 1,
+          terrain: 'water'
+        }
+      ]),
       terrainModal: {
         isActive: true,
         column: 1,
@@ -40,12 +47,13 @@ class TileMap extends Component {
     })
   }
 
-  onClickTile({ column, row }) {
-    this.setState(state => {
+  onClickTile({ column, row }: { column: number, row: number }) {
+    return this.setState(state => {
       const { map } = state
 
       if (!map.hasPopulatedHex({ column, row })) {
         return {
+          map: state.map,
           terrainModal: {
             isActive: true,
             column,
@@ -55,16 +63,17 @@ class TileMap extends Component {
       }
 
       return {
-        map: map.removeHex({ column, row })
+        map: map.removeHex({ column, row }),
+        terrainModal: state.terrainModal
       }
     })
   }
 
-  onAddTile({ terrain }) {
+  onAddTile({ terrain }: { terrain: string }) {
     this.setState(state => ({
       map: state.map.addHex({
-        column: state.terrainModal.column,
-        row: state.terrainModal.row,
+        column: state.terrainModal.column as number,
+        row: state.terrainModal.row as number,
         terrain
       }),
       terrainModal: {

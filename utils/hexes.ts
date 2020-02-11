@@ -1,4 +1,4 @@
-export function hasAdjacencyToExistingHexes(columnCoordinate, rowCoordinate, existingHexes) {
+export function hasAdjacencyToExistingHexes(columnCoordinate: number, rowCoordinate: number, existingHexes: { [key: number]: { [key: number]: {} }}) {
   const isOffsetRow = rowCoordinate % 2 !== 0
 
   if (existingHexes[columnCoordinate]) {

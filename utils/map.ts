@@ -1,39 +1,56 @@
 import { omit } from 'lodash'
 
-class Map {
-  constructor({ populatedHexes }) {
-    if (Array.isArray(populatedHexes)) {
-      this.populatedHexes = populatedHexes.reduce((hexes, { column, row, ...hex }) => {
-        if (!hexes[column]) {
-          return {
-            ...hexes,
-            [column]: {
-              [row]: hex
-            }
-          }
-        }
+interface HexMap {
+  [key: number]: {
+    [key: number]: {
+      terrain: string
+    }
+  }
+}
 
+interface SimpleHex {
+  column: number,
+  row: number,
+  terrain: string
+}
+
+class Map {
+  populatedHexes: HexMap
+
+  constructor({ populatedHexes }: { populatedHexes: HexMap }) {
+    this.populatedHexes = populatedHexes
+    this.getColumns = this.getColumns.bind(this)
+    this.hasPopulatedHex = this.hasPopulatedHex.bind(this)
+  }
+
+  static fromArray(hexes: SimpleHex[]) {
+    const populatedHexes = hexes.reduce((hexes: HexMap, { column, row, ...hex }) => {
+      if (!hexes[column]) {
         return {
           ...hexes,
           [column]: {
-            ...hexes[column],
             [row]: hex
           }
         }
-      }, {})
-    } else {
-      this.populatedHexes = populatedHexes
-    }
+      }
 
-    this.getColumns = this.getColumns.bind(this)
-    this.hasPopulatedHex = this.hasPopulatedHex.bind(this)
+      return {
+        ...hexes,
+        [column]: {
+          ...hexes[column],
+          [row]: hex
+        }
+      }
+    }, {})
+
+    return new Map({ populatedHexes })
   }
 
   getColumns() {
     return this.populatedHexes
   }
 
-  getHex({ column, row }) {
+  getHex({ column, row }: { column: number, row: number }) {
     if (!this.hasPopulatedHex({ column, row })) {
       return undefined
     }
@@ -41,12 +58,12 @@ class Map {
     return this.populatedHexes[column][row]
   }
 
-  hasPopulatedHex({ column, row }) {
+  hasPopulatedHex({ column, row }: { column: number, row: number }) {
     return this.populatedHexes[column] !== undefined &&
       this.populatedHexes[column][row] !== undefined
   }
 
-  addHex({ column, row, ...hex }) {
+  addHex({ column, row, ...hex }: SimpleHex) {
     const populatedHexes = {
       ...this.populatedHexes,
       [column]: {
@@ -58,7 +75,7 @@ class Map {
     return new Map({ populatedHexes })
   }
 
-  removeHex({ column, row }) {
+  removeHex({ column, row }: { column: number, row: number }) {
     if (!this.populatedHexes[column][row]) {
       throw new Error('Hex is not populated and therefore cannot be removed.')
     }

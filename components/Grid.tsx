@@ -1,14 +1,15 @@
 import { hasAdjacencyToExistingHexes } from '../utils/hexes'
-import Tile from '../components/tiles/Tile'
+import Map from '../utils/map'
+import Tile from './tiles/Tile'
 import './Grid.module.scss'
 
 const ADJACENT_TERRAIN_TYPE = 'new'
 const HIDDEN_TERRAIN_TYPE = 'hidden'
 
-function Grid({ map, onClickTile }) {
+function Grid({ map, onClickTile }: { map: Map, onClickTile: ({ column, row }: { column: number, row: number }) => void }) {
   const populatedHexes = map.getColumns()
-  const populatedHexColumns = Object.keys(populatedHexes)
-  const firstPopulatedColumnRows = Object.keys(populatedHexes[populatedHexColumns[0]])
+  const populatedHexColumns = Object.keys(populatedHexes).map(column => parseInt(column, 10))
+  const firstPopulatedColumnRows = Object.keys(populatedHexes[populatedHexColumns[0]]).map(row => parseInt(row, 10))
 
   // Set starting minimum and maximum column and row coordinates
   const minimumPopulatedHexColumn = Math.min(...populatedHexColumns) - 1
@@ -18,7 +19,7 @@ function Grid({ map, onClickTile }) {
 
   // Loop through all columns to determine minimum and maximum row coordinates
   populatedHexColumns.forEach(column => {
-    const columnRows = Object.keys(populatedHexes[column])
+    const columnRows = Object.keys(populatedHexes[column]).map(row => parseInt(row, 10))
 
     // Determine local minimum and maximum row
     const minimumColumnHexRow = Math.min(...columnRows)
