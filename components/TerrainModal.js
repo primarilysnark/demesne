@@ -11,7 +11,7 @@ const VALID_TERRAINS = [
   'water'
 ]
 
-function TerrainModal({ onSubmit }) {
+function TerrainModal({ onCancel, onSubmit }) {
   return (
     <div className="terrain-modal">
       <div className="terrain-modal__header">
@@ -35,7 +35,7 @@ function TerrainModal({ onSubmit }) {
         </ul>
       </div>
       <div className="terrain-modal__footer">
-        <button className="button button--link">Cancel</button>
+        <button className="button button--link" onClick={onCancel}>Cancel</button>
         <button className="button button--action">Next</button>
       </div>
     </div>

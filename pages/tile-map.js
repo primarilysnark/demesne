@@ -26,7 +26,18 @@ class TileMap extends Component {
     }
 
     this.onAddTile = this.onAddTile.bind(this)
+    this.onCancelAddTile = this.onCancelAddTile.bind(this)
     this.onClickTile = this.onClickTile.bind(this)
+  }
+
+  onCancelAddTile() {
+    this.setState({
+      terrainModal: {
+        isActive: false,
+        column: null,
+        row: null
+      }
+    })
   }
 
   onClickTile({ column, row }) {
@@ -71,7 +82,7 @@ class TileMap extends Component {
       <div className="grid">
         <Grid map={map} onClickTile={this.onClickTile} />
         {terrainModal.isActive ? (
-          <TerrainModal onSubmit={this.onAddTile} />
+          <TerrainModal onCancel={this.onCancelAddTile} onSubmit={this.onAddTile} />
         ) : null}
       </div>
     )
