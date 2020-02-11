@@ -5,7 +5,7 @@ export function hasAdjacencyToExistingHexes(columnCoordinate: number, rowCoordin
     if (existingHexes[columnCoordinate][rowCoordinate - 1] !== undefined) {
       return true
     }
-    
+
     if (existingHexes[columnCoordinate][rowCoordinate + 1] !== undefined) {
       return true
     }
