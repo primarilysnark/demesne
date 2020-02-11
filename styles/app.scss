@@ -1,0 +1,15 @@
+.app-logo {
+  color: white;
+  left: 20px;
+  line-height: 32px;
+  position: fixed;
+  top: 20px;
+  z-index: 99;
+
+  &__icon {
+    font-size: 32px;
+    line-height: 32px;
+    padding-right: 8px;
+    vertical-align: top;
+  }
+}
