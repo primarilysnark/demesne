@@ -9,8 +9,8 @@ interface HexMap {
 }
 
 interface SimpleHex {
-  column: number,
-  row: number,
+  column: number
+  row: number
   terrain: string
 }
 
@@ -24,24 +24,27 @@ class Map {
   }
 
   static fromArray(hexes: SimpleHex[]) {
-    const populatedHexes = hexes.reduce((hexes: HexMap, { column, row, ...hex }) => {
-      if (!hexes[column]) {
+    const populatedHexes = hexes.reduce(
+      (hexes: HexMap, { column, row, ...hex }) => {
+        if (!hexes[column]) {
+          return {
+            ...hexes,
+            [column]: {
+              [row]: hex
+            }
+          }
+        }
+
         return {
           ...hexes,
           [column]: {
+            ...hexes[column],
             [row]: hex
           }
         }
-      }
-
-      return {
-        ...hexes,
-        [column]: {
-          ...hexes[column],
-          [row]: hex
-        }
-      }
-    }, {})
+      },
+      {}
+    )
 
     return new Map({ populatedHexes })
   }
@@ -50,7 +53,7 @@ class Map {
     return this.populatedHexes
   }
 
-  getHex({ column, row }: { column: number, row: number }) {
+  getHex({ column, row }: { column: number; row: number }) {
     if (!this.hasPopulatedHex({ column, row })) {
       return undefined
     }
@@ -58,9 +61,11 @@ class Map {
     return this.populatedHexes[column][row]
   }
 
-  hasPopulatedHex({ column, row }: { column: number, row: number }) {
-    return this.populatedHexes[column] !== undefined &&
+  hasPopulatedHex({ column, row }: { column: number; row: number }) {
+    return (
+      this.populatedHexes[column] !== undefined &&
       this.populatedHexes[column][row] !== undefined
+    )
   }
 
   addHex({ column, row, ...hex }: SimpleHex) {
@@ -75,7 +80,7 @@ class Map {
     return new Map({ populatedHexes })
   }
 
-  removeHex({ column, row }: { column: number, row: number }) {
+  removeHex({ column, row }: { column: number; row: number }) {
     if (!this.populatedHexes[column][row]) {
       throw new Error('Hex is not populated and therefore cannot be removed.')
     }

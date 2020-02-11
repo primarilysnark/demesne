@@ -1,4 +1,8 @@
-export function hasAdjacencyToExistingHexes(columnCoordinate: number, rowCoordinate: number, existingHexes: { [key: number]: { [key: number]: {} }}) {
+export function hasAdjacencyToExistingHexes(
+  columnCoordinate: number,
+  rowCoordinate: number,
+  existingHexes: { [key: number]: { [key: number]: {} } }
+) {
   const isOffsetRow = rowCoordinate % 2 !== 0
 
   if (existingHexes[columnCoordinate]) {
@@ -16,11 +20,17 @@ export function hasAdjacencyToExistingHexes(columnCoordinate: number, rowCoordin
       return true
     }
 
-    if (!isOffsetRow && existingHexes[columnCoordinate - 1][rowCoordinate - 1] !== undefined) {
+    if (
+      !isOffsetRow &&
+      existingHexes[columnCoordinate - 1][rowCoordinate - 1] !== undefined
+    ) {
       return true
     }
 
-    if (!isOffsetRow && existingHexes[columnCoordinate - 1][rowCoordinate + 1] !== undefined) {
+    if (
+      !isOffsetRow &&
+      existingHexes[columnCoordinate - 1][rowCoordinate + 1] !== undefined
+    ) {
       return true
     }
   }
@@ -30,11 +40,17 @@ export function hasAdjacencyToExistingHexes(columnCoordinate: number, rowCoordin
       return true
     }
 
-    if (isOffsetRow && existingHexes[columnCoordinate + 1][rowCoordinate - 1] !== undefined) {
+    if (
+      isOffsetRow &&
+      existingHexes[columnCoordinate + 1][rowCoordinate - 1] !== undefined
+    ) {
       return true
     }
 
-    if (isOffsetRow && existingHexes[columnCoordinate + 1][rowCoordinate + 1] !== undefined) {
+    if (
+      isOffsetRow &&
+      existingHexes[columnCoordinate + 1][rowCoordinate + 1] !== undefined
+    ) {
       return true
     }
   }

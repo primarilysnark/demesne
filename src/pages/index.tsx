@@ -5,10 +5,10 @@ import TerrainModal from '../components/TerrainModal'
 import './Index.module.scss'
 
 interface TileMapState {
-  map: Map,
+  map: Map
   terrainModal: {
-    column: number | null,
-    isActive: boolean,
+    column: number | null
+    isActive: boolean
     row: number | null
   }
 }
@@ -29,7 +29,7 @@ class TileMap extends Component<{}, TileMapState> {
         isActive: true,
         column: 1,
         row: 1
-      },
+      }
     }
 
     this.onAddTile = this.onAddTile.bind(this)
@@ -47,7 +47,7 @@ class TileMap extends Component<{}, TileMapState> {
     })
   }
 
-  onClickTile({ column, row }: { column: number, row: number }) {
+  onClickTile({ column, row }: { column: number; row: number }) {
     return this.setState(state => {
       const { map } = state
 
@@ -91,7 +91,10 @@ class TileMap extends Component<{}, TileMapState> {
       <div className="grid">
         <Grid map={map} onClickTile={this.onClickTile} />
         {terrainModal.isActive ? (
-          <TerrainModal onCancel={this.onCancelAddTile} onSubmit={this.onAddTile} />
+          <TerrainModal
+            onCancel={this.onCancelAddTile}
+            onSubmit={this.onAddTile}
+          />
         ) : null}
       </div>
     )

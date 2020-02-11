@@ -8,7 +8,8 @@
     "build": "next build",
     "dev:server": "nodemon --watch lib -e ts --exec npm run start:server",
     "dev": "next",
-    "lint": "tslint -c tslint.json 'src/**/*.tsx'",
+    "lint": "tslint -c tslint.json --fix 'lib/**/*.tsx'",
+    "format": "prettier --write './{src,lib}/**/*.{ts,tsx}'",
     "prestart:server": "npm run build:server",
     "start:server": "node dist/server.js",
     "start": "next start"
@@ -35,7 +36,10 @@
     "@types/node": "^13.7.1",
     "@types/react": "^16.9.19",
     "nodemon": "^2.0.2",
+    "prettier": "^1.19.1",
     "tslint": "^6.0.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.1.0",
     "typescript": "^3.7.5"
   }
 }
