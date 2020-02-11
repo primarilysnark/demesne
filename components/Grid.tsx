@@ -47,13 +47,13 @@ function Grid({ map, onClickTile }: { map: Map, onClickTile: ({ column, row }: {
 
   return (
     <div className="wrapper" style={{ width: `${gridWidth}px` }}>
-      {Array.from(Array(rowCountToRender)).map((_, rowIndex) => {
+      {Array.from(Array(rowCountToRender)).map((_row, rowIndex) => {
         const rowCoordinate = rowIndex + minimumPopulatedHexRow
         const rowIsOffset = rowCoordinate % 2 !== 0
 
         return (
           <div key={rowCoordinate} className={rowIsOffset ? 'row--offset' : undefined}>
-            {Array.from(Array(columnCountToRender)).map((_, columnIndex) => {
+            {Array.from(Array(columnCountToRender)).map((_column, columnIndex) => {
               const columnCoordinate = columnIndex + minimumPopulatedHexColumn
 
               const hex = map.getHex({ column: columnCoordinate, row: rowCoordinate })

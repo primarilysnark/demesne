@@ -1,9 +1,9 @@
-import { Component, FunctionComponent } from 'react'
+import { AppProps } from 'next/app'
 import '../styles/styles.scss'
 import '../styles/app.scss'
 import '../node_modules/@fortawesome/fontawesome-pro/css/all.min.css'
 
-function MyApp({ Component, pageProps }: { Component: any, pageProps: {} } ) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <div>
       <nav className="app-logo">
