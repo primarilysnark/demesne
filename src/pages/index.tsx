@@ -1,8 +1,8 @@
 import { Component } from 'react'
 import Grid from '../components/Grid'
 import Map from '../utils/map'
-import './ClipPath.module.scss'
 import TerrainModal from '../components/TerrainModal'
+import './Index.module.scss'
 
 interface TileMapState {
   map: Map,
