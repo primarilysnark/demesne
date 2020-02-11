@@ -10,6 +10,7 @@
     "dev": "next",
     "lint": "tslint -c tslint.json --fix 'lib/**/*.tsx'",
     "format": "prettier --write './{src,lib}/**/*.{ts,tsx}'",
+    "format:check": "prettier -c './{src,lib}/**/*.{ts,tsx}'",
     "prestart:server": "npm run build:server",
     "start:server": "node dist/server.js",
     "start": "next start"
