@@ -2,6 +2,7 @@ import { Component } from 'react'
 import Grid from '../components/Grid'
 import Map from '../utils/map'
 import './ClipPath.module.scss'
+import TerrainModal from '../components/TerrainModal'
 
 class TileMap extends Component {
   constructor(props) {
@@ -16,9 +17,15 @@ class TileMap extends Component {
             terrain: 'water'
           }
         ]
-      })
+      }),
+      terrainModal: {
+        isActive: true,
+        column: 1,
+        row: 1
+      },
     }
 
+    this.onAddTile = this.onAddTile.bind(this)
     this.onClickTile = this.onClickTile.bind(this)
   }
 
@@ -28,11 +35,11 @@ class TileMap extends Component {
 
       if (!map.hasPopulatedHex({ column, row })) {
         return {
-          map: map.addHex({
+          terrainModal: {
+            isActive: true,
             column,
-            row,
-            terrain: 'water'
-          })
+            row
+          }
         }
       }
 
@@ -42,12 +49,30 @@ class TileMap extends Component {
     })
   }
 
+  onAddTile({ terrain }) {
+    this.setState(state => ({
+      map: state.map.addHex({
+        column: state.terrainModal.column,
+        row: state.terrainModal.row,
+        terrain
+      }),
+      terrainModal: {
+        isActive: false,
+        column: null,
+        row: null
+      }
+    }))
+  }
+
   render() {
-    const { map } = this.state
+    const { map, terrainModal } = this.state
 
     return (
       <div className="grid">
         <Grid map={map} onClickTile={this.onClickTile} />
+        {terrainModal.isActive ? (
+          <TerrainModal onSubmit={this.onAddTile} />
+        ) : null}
       </div>
     )
   }
