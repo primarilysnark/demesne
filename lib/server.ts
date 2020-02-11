@@ -1,13 +1,15 @@
 import express from 'express'
+import expressWs from 'express-ws'
+import * as controllers from './controllers'
+
+const port = parseInt(process.env.PORT, 10) || 8080
 const app = express()
-const port = 8080 // default port to listen
+expressWs(app)
 
-// define a route handler for the default home page
-app.get('/', (req, res) => {
-  res.send('Hello world 2!')
-})
+app.use('/', controllers.meta.getRouter())
+app.use('/map', controllers.map.getRouter())
 
-// start the Express server
 app.listen(port, () => {
-  console.log(`server started at http://localhost:${port}`)
+  // tslint:disable-next-line: no-console
+  console.log(`Server started at http://localhost:${port}`)
 })
