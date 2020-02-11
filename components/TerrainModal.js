@@ -16,7 +16,7 @@ function TerrainModal({ onCancel, onSubmit }) {
     <div className="terrain-modal">
       <div className="terrain-modal__header">
         <div className="icon icon--circle">
-          <i class="fas fa-island-tropical" />
+          <i className="fas fa-island-tropical" />
         </div>
         <div className="terrain-modal__title">
           Choose terrain
