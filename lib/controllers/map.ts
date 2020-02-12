@@ -9,8 +9,84 @@ export function getRouter() {
 
   router.onMessage(
     'add-hex',
-    async (_req: any, _res: any, _ws: any, message: object) => {
-      return message
+    async (
+      _req: any,
+      _res: any,
+      _ws: any,
+      message: {
+        mapId: number
+        column: number
+        row: number
+        terrain: string
+      }
+    ) => {
+      // tslint:disable-next-line: prefer-const
+      let [hex, created] = await Hex.findOrCreate({
+        defaults: {
+          terrain: message.terrain
+        },
+        where: {
+          column: message.column,
+          mapId: message.mapId,
+          row: message.row
+        }
+      })
+
+      if (!created) {
+        hex = await hex.update({
+          terrain: message.terrain
+        })
+      }
+
+      if (created) {
+        router.broadcast('hex-added', {
+          column: hex.column,
+          mapId: message.mapId,
+          row: hex.row,
+          terrain: hex.terrain
+        })
+      } else {
+        router.broadcast('hex-updated', {
+          column: hex.column,
+          mapId: message.mapId,
+          row: hex.row,
+          terrain: hex.terrain
+        })
+      }
+    }
+  )
+
+  router.onMessage(
+    'remove-hex',
+    async (
+      _req: any,
+      _res: any,
+      _ws: any,
+      message: {
+        mapId: number
+        column: number
+        row: number
+      }
+    ) => {
+      const hex = await Hex.findOne({
+        where: {
+          column: message.column,
+          mapId: message.mapId,
+          row: message.row
+        }
+      })
+
+      if (!hex) {
+        return
+      }
+
+      await hex.destroy()
+
+      router.broadcast('hex-removed', {
+        column: message.column,
+        mapId: message.mapId,
+        row: message.row
+      })
     }
   )
 
@@ -36,7 +112,10 @@ export function getRouter() {
         return []
       }
 
-      return await serializer.serialize(maps)
+      return {
+        type: 'sync',
+        content: await serializer.serialize(maps)
+      }
     }
   )
 

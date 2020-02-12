@@ -82,7 +82,7 @@ class Map {
 
   removeHex({ column, row }: { column: number; row: number }) {
     if (!this.populatedHexes[column][row]) {
-      throw new Error('Hex is not populated and therefore cannot be removed.')
+      return new Map({ populatedHexes: this.populatedHexes })
     }
 
     if (Object.keys(this.populatedHexes[column]).length === 1) {

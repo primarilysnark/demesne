@@ -31,11 +31,19 @@ type MessageHandler = (
 
 interface IWSExpressRouter extends ExpressRouter {
   onMessage: (type: string, handler: MessageHandler) => void
+  broadcast: (type: string, content: object) => void
 }
 
 export function Router(path: string) {
   const router = ExpressRouter() as IWSExpressRouter & WithWebsocketMethod
   const handlers = new Map<string, MessageHandler>()
+  const openSockets = new Set<ws>()
+
+  function handleClose(webSocket: ws) {
+    if (openSockets.has(webSocket)) {
+      openSockets.delete(webSocket)
+    }
+  }
 
   function handleMessage(req: Request, res: Response, webSocket: ws) {
     return async (message: string) => {
@@ -75,10 +83,22 @@ export function Router(path: string) {
     handlers.set(type, handler)
   }
 
+  router.broadcast = (type: string, content: object) => {
+    const packet = JSON.stringify({
+      type,
+      content
+    })
+
+    openSockets.forEach(socket => socket.send(packet))
+  }
+
   router.ws(path, async (webSocket: ws, req: Request) => {
     const res: Response = null
+    openSockets.add(webSocket)
 
     webSocket.on('message', await handleMessage(req, res, webSocket))
+
+    webSocket.on('close', () => handleClose(webSocket))
     await onConnect(req, res, webSocket)
   })
 

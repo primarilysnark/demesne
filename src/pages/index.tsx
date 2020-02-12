@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import { DemesneWebSocket } from '../utils/websocket'
 import Grid from '../components/Grid'
 import Map from '../utils/map'
 import TerrainModal from '../components/TerrainModal'
@@ -6,6 +7,7 @@ import './Index.module.scss'
 
 interface TileMapState {
   map: Map
+  socketState: number | null
   terrainModal: {
     column: number | null
     isActive: boolean
@@ -14,27 +16,75 @@ interface TileMapState {
 }
 
 class TileMap extends Component<{}, TileMapState> {
+  public socket: DemesneWebSocket | null
+
   constructor(props: {}) {
     super(props)
 
     this.state = {
-      map: Map.fromArray([
-        {
-          column: 1,
-          row: 1,
-          terrain: 'water'
-        }
-      ]),
+      socketState: null,
+      map: new Map({ populatedHexes: {} }),
       terrainModal: {
-        isActive: true,
-        column: 1,
-        row: 1
+        isActive: false,
+        column: null,
+        row: null
       }
     }
+
+    this.socket = null
 
     this.onAddTile = this.onAddTile.bind(this)
     this.onCancelAddTile = this.onCancelAddTile.bind(this)
     this.onClickTile = this.onClickTile.bind(this)
+  }
+
+  componentDidMount() {
+    this.socket = DemesneWebSocket.connect('ws://localhost:8080/api/map')
+
+    this.socket.on('message', ({ type, content }) => {
+      switch (type) {
+        case 'sync':
+          this.setState({
+            map: Map.fromArray(
+              content.data.map((entry: any) => entry.attributes)
+            ),
+            socketState: WebSocket.OPEN
+          })
+          break
+
+        case 'hex-added':
+        case 'hex-updated':
+          this.setState(state => ({
+            map: state.map.addHex({
+              column: content.column,
+              row: content.row,
+              terrain: content.terrain
+            })
+          }))
+          break
+
+        case 'hex-removed':
+          this.setState(state => ({
+            map: state.map.removeHex({
+              column: content.column,
+              row: content.row
+            })
+          }))
+          break
+      }
+    })
+
+    this.socket.on('open', () => {
+      this.socket?.send('sync', {
+        mapId: 1
+      })
+    })
+  }
+
+  componentWillUnmount() {
+    if (this.socket) {
+      this.socket.close()
+    }
   }
 
   onCancelAddTile() {
@@ -62,6 +112,12 @@ class TileMap extends Component<{}, TileMapState> {
         }
       }
 
+      this.socket?.send('remove-hex', {
+        column,
+        mapId: 1,
+        row
+      })
+
       return {
         map: map.removeHex({ column, row }),
         terrainModal: state.terrainModal
@@ -70,6 +126,15 @@ class TileMap extends Component<{}, TileMapState> {
   }
 
   onAddTile({ terrain }: { terrain: string }) {
+    const { column, row } = this.state.terrainModal
+
+    this.socket?.send('add-hex', {
+      column,
+      mapId: 1,
+      row,
+      terrain
+    })
+
     this.setState(state => ({
       map: state.map.addHex({
         column: state.terrainModal.column as number,
@@ -85,11 +150,13 @@ class TileMap extends Component<{}, TileMapState> {
   }
 
   render() {
-    const { map, terrainModal } = this.state
+    const { map, socketState, terrainModal } = this.state
 
     return (
       <div className="grid">
-        <Grid map={map} onClickTile={this.onClickTile} />
+        {socketState && socketState === WebSocket.OPEN ? (
+          <Grid map={map} onClickTile={this.onClickTile} />
+        ) : null}
         {terrainModal.isActive ? (
           <TerrainModal
             onCancel={this.onCancelAddTile}
