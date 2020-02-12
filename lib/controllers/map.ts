@@ -1,4 +1,6 @@
-import { Map } from '../models'
+import { Op } from 'sequelize'
+
+import { Hex, Map } from '../models'
 import { serializer } from '../sequelize'
 import * as websocket from './websocket'
 
@@ -14,12 +16,23 @@ export function getRouter() {
 
   router.onMessage(
     'sync',
-    async (_req: any, _res: any, _ws: any, message: object) => {
-      const maps = await Map.findAll({
-        order: [['updatedAt', 'DESC']]
+    async (_req: any, _res: any, _ws: any, message: { mapId: number }) => {
+      const maps = await Hex.findAll({
+        order: ['column', 'row'],
+        include: [
+          {
+            as: 'map',
+            model: Map,
+            where: {
+              id: {
+                [Op.eq]: message.mapId
+              }
+            }
+          }
+        ]
       })
 
-      if (!maps) {
+      if (!maps || maps.length === 0) {
         return []
       }
 

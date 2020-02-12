@@ -1,10 +1,6 @@
-import {
-  generateJsonApiIfyDefinition,
-  JsonApiModel,
-  Serializer
-} from '@primarilysnark/sequelize-json-api'
-import { Sequelize, SequelizeOptions } from 'sequelize-typescript'
-import { Dialect } from 'sequelize'
+import { JsonApiModel, Serializer } from '@primarilysnark/sequelize-json-api'
+import { Sequelize, SequelizeOptions, Model } from 'sequelize-typescript'
+import { Dialect, ModelCtor } from 'sequelize'
 
 import configs from '../config/database.json'
 import * as models from './models'
@@ -26,11 +22,9 @@ export async function setup<T extends JsonApiModel<T>>() {
     Object.values(models).filter(model => typeof model === 'function')
   )
 
-  const jsonApiModels: JsonApiModel<T>[] = ((Object.values(
+  const jsonApiModels: JsonApiModel<T>[] = (Object.values(
     sequelize.models
-  ) as unknown) as JsonApiModel<T>[]).filter(model =>
-    JsonApiModel.isPrototypeOf(model)
-  )
+  ) as unknown) as JsonApiModel<T>[]
 
   return Promise.all(jsonApiModels.map(model => serializer.define(model)))
 }
