@@ -1,17 +1,17 @@
 import { hasAdjacencyToExistingHexes } from '../utils/hexes'
-import Map from '../utils/map'
+import HexMap, { HexCoordinate } from '../utils/hex-map'
 import Tile from './tiles/Tile'
-import './Grid.module.scss'
+import './HexMapGrid.module.scss'
 
 const ADJACENT_TERRAIN_TYPE = 'new'
 const HIDDEN_TERRAIN_TYPE = 'hidden'
 
-function Grid({
+function HexMapGrid({
   map,
   onClickTile
 }: {
-  map: Map
-  onClickTile: ({ column, row }: { column: number; row: number }) => void
+  map: HexMap
+  onClickTile: ({ column, row }: HexCoordinate) => void
 }) {
   const populatedHexes = map.getColumns()
   const populatedHexColumns = Object.keys(populatedHexes).map(column =>
@@ -112,4 +112,4 @@ function Grid({
   )
 }
 
-export default Grid
+export default HexMapGrid

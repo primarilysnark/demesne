@@ -1,6 +1,6 @@
 import { omit } from 'lodash'
 
-interface HexMap {
+interface HexMapCoordinates {
   [key: number]: {
     [key: number]: {
       terrain: string
@@ -8,27 +8,30 @@ interface HexMap {
   }
 }
 
-interface SimpleHex {
+export interface HexCoordinate {
   column: number
   row: number
+}
+
+export interface Hex extends HexCoordinate {
   terrain: string
 }
 
-class Map {
-  populatedHexes: HexMap
+class HexMap {
+  populatedHexes: HexMapCoordinates
 
-  constructor({ populatedHexes }: { populatedHexes: HexMap }) {
+  constructor({ populatedHexes }: { populatedHexes: HexMapCoordinates }) {
     this.populatedHexes = populatedHexes
     this.getColumns = this.getColumns.bind(this)
     this.hasPopulatedHex = this.hasPopulatedHex.bind(this)
   }
 
-  static fromArray(hexes: SimpleHex[]) {
+  static fromArray(hexes: Hex[]) {
     const populatedHexes = hexes.reduce(
-      (hexes: HexMap, { column, row, ...hex }) => {
-        if (!hexes[column]) {
+      (coordinates: HexMapCoordinates, { column, row, ...hex }) => {
+        if (!coordinates[column]) {
           return {
-            ...hexes,
+            ...coordinates,
             [column]: {
               [row]: hex
             }
@@ -36,9 +39,9 @@ class Map {
         }
 
         return {
-          ...hexes,
+          ...coordinates,
           [column]: {
-            ...hexes[column],
+            ...coordinates[column],
             [row]: hex
           }
         }
@@ -46,7 +49,7 @@ class Map {
       {}
     )
 
-    return new Map({ populatedHexes })
+    return new HexMap({ populatedHexes })
   }
 
   getColumns() {
@@ -68,7 +71,7 @@ class Map {
     )
   }
 
-  addHex({ column, row, ...hex }: SimpleHex) {
+  addHex({ column, row, ...hex }: Hex) {
     const populatedHexes = {
       ...this.populatedHexes,
       [column]: {
@@ -77,19 +80,19 @@ class Map {
       }
     }
 
-    return new Map({ populatedHexes })
+    return new HexMap({ populatedHexes })
   }
 
   removeHex({ column, row }: { column: number; row: number }) {
     if (!this.populatedHexes[column][row]) {
-      return new Map({ populatedHexes: this.populatedHexes })
+      return new HexMap({ populatedHexes: this.populatedHexes })
     }
 
     if (Object.keys(this.populatedHexes[column]).length === 1) {
-      return new Map({ populatedHexes: omit(this.populatedHexes, [column]) })
+      return new HexMap({ populatedHexes: omit(this.populatedHexes, [column]) })
     }
 
-    return new Map({
+    return new HexMap({
       populatedHexes: {
         ...this.populatedHexes,
         [column]: omit(this.populatedHexes[column], [row])
@@ -98,4 +101,4 @@ class Map {
   }
 }
 
-export default Map
+export default HexMap
