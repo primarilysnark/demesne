@@ -1,8 +1,8 @@
-$gunmetal-blue: #000614;
+@import '../styles/variables';
 
 .grid {
   align-items: center;
-  background: $gunmetal-blue;
+  background: $body-background;
   display: flex;
   flex-direction: column;
   height: 100vh;

@@ -1,5 +1,7 @@
+@import '../styles/variables';
+
 .app-logo {
-  color: white;
+  color: $body-text;
   left: 20px;
   line-height: 32px;
   position: fixed;

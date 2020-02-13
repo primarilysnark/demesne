@@ -1,8 +1,7 @@
-$neon-blue: #5a54fe;
-$white: #ffffff;
+@import '../styles/variables';
 
 .terrain-modal {
-  background: $white;
+  background: $neutral-base;
   border-radius: 8px;
   left: 50%;
   position: absolute;
@@ -25,7 +24,7 @@ $white: #ffffff;
   }
 
   &__footer {
-    background: #f4f5f7;
+    background: $neutral-accent;
     border-bottom-left-radius: inherit;
     border-bottom-right-radius: inherit;
     padding: 16px 20px;
@@ -40,8 +39,8 @@ $white: #ffffff;
   display: inline-block;
 
   &--action {
-    background-color: $neon-blue;
-    color: $white;
+    background-color: $primary-base;
+    color: $primary-text;
   }
 }
 
@@ -49,9 +48,9 @@ $white: #ffffff;
   display: inline-block;
 
   &--circle {
-    background: rgba(90, 84, 254, 0.4);
+    background: adjust-color($color: $primary-base, $alpha: -0.6);
     border-radius: 20px;
-    color: $neon-blue;
+    color: $primary-base;
     font-size: 20px;
     height: 40px;
     line-height: 40px;

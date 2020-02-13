@@ -2,6 +2,7 @@ import { Component } from 'react'
 import HexMap, { Hex, HexCoordinate } from '../utils/hex-map'
 import Map from './HexMapGrid'
 import TerrainModal from './TerrainModal'
+import './HexMapEditor.module.scss'
 
 interface HexMapEditorProps {
   addHex: (hex: Hex) => void
