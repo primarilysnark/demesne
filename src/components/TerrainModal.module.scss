@@ -7,7 +7,7 @@
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 480px;
+  width: 560px;
   z-index: 999;
 
   &__header {
@@ -65,28 +65,41 @@
   flex-wrap: wrap;
   justify-content: space-between;
   text-align: center;
-  padding: 0 16px 32px;
+  padding: 16px 16px 32px;
 
   li {
     display: block;
   }
 
   &__option {
-    background: none;
+    align-items: center;
+    background: $neutral-accent;
     border: none;
+    border-radius: 8px;
     cursor: pointer;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    margin: 12px 0;
+    padding: 0 0 12px;
+    width: 120px;
 
     img {
       display: block;
-      filter: grayscale(0.8);
-      margin-top: 12px;
-      transition: filter 0.2s ease;
+      margin-top: -4px;
       width: 85px;
     }
 
-    &:hover img {
-      filter: none;
+    &:focus {
+      outline: none;
+    }
+
+    &--active, &:hover {
+      background: $primary-base;
+      color: $primary-text;
+
+      img {
+        filter: grayscale(1);
+      }
     }
   }
 
