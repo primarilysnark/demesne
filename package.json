@@ -13,7 +13,7 @@
     "format:check": "prettier -c './{src,lib}/**/*.{ts,tsx}'",
     "prestart:server": "npm run build:server",
     "start:server": "node dist/lib/index.js",
-    "start": "next start"
+    "start": "next start -p $PORT"
   },
   "repository": {
     "type": "git",
