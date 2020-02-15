@@ -9,9 +9,7 @@ const env =
 class TileMap extends Component<{}, {}> {
   render() {
     return (
-      <HexMapEditorContainer
-        url={`ws://${constants[env].api.baseUri}/api/map`}
-      />
+      <HexMapEditorContainer url={`${constants[env].api.baseUri}/api/map`} />
     )
   }
 }

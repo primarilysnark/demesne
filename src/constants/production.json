@@ -1,5 +1,5 @@
 {
   "api": {
-    "baseUri": "demesne-api-staging.herokuapp.com"
+    "baseUri": "wss://demesne-api-staging.herokuapp.com"
   }
 }
