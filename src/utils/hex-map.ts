@@ -84,7 +84,7 @@ class HexMap {
   }
 
   removeHex({ column, row }: { column: number; row: number }) {
-    if (!this.populatedHexes[column][row]) {
+    if (!this.hasPopulatedHex({ column, row })) {
       return new HexMap({ populatedHexes: this.populatedHexes })
     }
 
