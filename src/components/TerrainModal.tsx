@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import Modal from './Modal'
 import './TerrainModal.module.scss'
 
 interface TerrainModalProps {
@@ -54,14 +55,14 @@ class TerrainModal extends Component<TerrainModalProps, TerrainModalState> {
     const { terrain } = this.state
 
     return (
-      <div className="terrain-modal">
-        <div className="terrain-modal__header">
+      <Modal>
+        <Modal.Header>
           <div className="icon icon--circle">
             <i className="fas fa-island-tropical" />
           </div>
-          <div className="terrain-modal__title">Choose terrain</div>
-        </div>
-        <div className="terrain-modal__content">
+          <Modal.Title>Choose terrain</Modal.Title>
+        </Modal.Header>
+        <Modal.Content>
           <ul className="terrain-list">
             {TERRAINS.map(terrainOption => (
               <li key={terrainOption}>
@@ -79,16 +80,23 @@ class TerrainModal extends Component<TerrainModalProps, TerrainModalState> {
               </li>
             ))}
           </ul>
-        </div>
-        <div className="terrain-modal__footer">
-          <button className="button button--link" onClick={onCancel}>
-            Cancel
-          </button>
-          <button className="button button--action" onClick={this.submit}>
-            Next
-          </button>
-        </div>
-      </div>
+        </Modal.Content>
+        <Modal.Footer>
+          <p className="control">
+            <button
+              className="button is-primary is-outlined"
+              onClick={onCancel}
+            >
+              Cancel
+            </button>
+          </p>
+          <p className="control">
+            <button className="button is-primary" onClick={this.submit}>
+              Next
+            </button>
+          </p>
+        </Modal.Footer>
+      </Modal>
     )
   }
 }

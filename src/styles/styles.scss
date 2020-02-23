@@ -1,1 +1,25 @@
+@import "_variables.scss";
 @import "../../node_modules/bulma/bulma.sass";
+
+body {
+  margin: 72px 0 0;
+}
+
+.table td, .table th {
+  vertical-align: middle;
+}
+
+.icon {
+  display: inline-block;
+
+  &--circle {
+    background: adjust-color($color: $primary, $alpha: -0.6);
+    border-radius: 20px;
+    color: $primary;
+    font-size: 20px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    width: 40px;
+  }
+}

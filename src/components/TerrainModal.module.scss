@@ -1,71 +1,11 @@
 @import '../styles/variables';
 
-.terrain-modal {
-  background: $neutral-base;
-  border-radius: 8px;
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 560px;
-  z-index: 999;
-
-  &__header {
-    margin-bottom: -12px;
-    padding: 16px 20px 0;
-  }
-
-  &__title {
-    display: inline-block;
-    font-size: 18px;
-    font-weight: bold;
-    line-height: 40px;
-    margin-left: 8px;
-  }
-
-  &__footer {
-    background: $neutral-accent;
-    border-bottom-left-radius: inherit;
-    border-bottom-right-radius: inherit;
-    padding: 16px 20px;
-    text-align: right;
-  }
-}
-
-.button {
-  background: none;
-  border: none;
-  border-radius: 8px;
-  display: inline-block;
-
-  &--action {
-    background-color: $primary-base;
-    color: $primary-text;
-  }
-}
-
-.icon {
-  display: inline-block;
-
-  &--circle {
-    background: adjust-color($color: $primary-base, $alpha: -0.6);
-    border-radius: 20px;
-    color: $primary-base;
-    font-size: 20px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    width: 40px;
-  }
-}
-
 .terrain-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
   text-align: center;
-  padding: 16px 16px 32px;
 
   li {
     display: block;
@@ -94,7 +34,7 @@
     }
 
     &--active, &:hover {
-      background: $primary-base;
+      background: $primary;
       color: $primary-text;
 
       img {
