@@ -1,17 +1,25 @@
 @import '../styles/variables';
 
-.app-logo {
-  color: $body-text;
-  left: 20px;
-  line-height: 32px;
+.app-nav {
+  background: $body-background;
+  left: 0;
   position: fixed;
-  top: 20px;
+  top: 0;
+  width: 100%;
   z-index: 99;
 
-  &__icon {
-    font-size: 32px;
+  &__brand {
+    color: $neutral-base;
+    display: inline-block;
     line-height: 32px;
-    padding-right: 8px;
-    vertical-align: top;
+    margin: 20px;
+
+    &-icon {
+      color: inherit;
+      font-size: 32px;
+      line-height: 32px;
+      padding-right: 8px;
+      vertical-align: top;
+    }
   }
 }
