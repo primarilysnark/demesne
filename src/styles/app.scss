@@ -2,6 +2,7 @@
 
 .app-nav {
   background: $body-background;
+  display: flex;
   left: 0;
   position: fixed;
   top: 0;
@@ -13,6 +14,7 @@
     display: inline-block;
     line-height: 32px;
     margin: 20px;
+    position: absolute;
 
     &-icon {
       color: inherit;
@@ -20,6 +22,28 @@
       line-height: 32px;
       padding-right: 8px;
       vertical-align: top;
+    }
+  }
+
+  &__sequence {
+    color: $neutral-base;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    line-height: 32px;
+    margin: 20px;
+
+    &-item {
+      display: inline-block;
+
+      &:before {
+        content: '/';
+        margin: 0 16px;
+      }
+
+      &:first-of-type:before {
+        content: none;
+      }
     }
   }
 }

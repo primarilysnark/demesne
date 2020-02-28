@@ -23,3 +23,17 @@ body {
     width: 40px;
   }
 }
+
+.tile-overlay {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: inherit;
+  bottom: 0;
+  display: flex;
+  font-size: 80px;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
